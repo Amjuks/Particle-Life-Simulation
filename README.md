@@ -2,6 +2,8 @@
 
 A fun and interactive particle life simulation built with plain JavaScript and HTML5 Canvas. Watch colorful particles interact, move, and evolve dynamically in your browser.
 
+Live Demo: [https://amjuks.github.io/Particle-Life-Simulation/](https://amjuks.github.io/Particle-Life-Simulation/)
+
 ## Features
 
 - **Interactive Simulation:** Particles interact based on customizable physics parameters.
