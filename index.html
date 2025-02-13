@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas></canvas>
+    <h1 class="starter-tip">Tap Anywhere to Customize Particle Life</h1>
+    <div class="form-container">
+        <h1 class="form-title"><i class="fa fa-cog"></i> Customize Particle Life</h1>
+        <form id="particleForm">
+
+          <fieldset>
+            <legend>Particles</legend>
+            <div class="form-group">
+              <label for="numberOfParticles"><i class="fa fa-fire"></i> Number Of Particles:</label>
+              <div class="slider-container">
+                <input type="range" id="numberOfParticles" name="numberOfParticles" min="100" max="5000" step="50">
+                <span id="numberOfParticlesValue" class="slider-value">5000</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="numberOfColors"><i class="fa fa-palette"></i> Number Of Colors:</label>
+              <div class="slider-container">
+                <input type="range" id="numberOfColors" name="numberOfColors" min="1" max="10" step="1">
+                <span id="numberOfColorsValue" class="slider-value">3</span>
+              </div>
+            </div>
+          </fieldset>
+    
+          <fieldset>
+            <legend>Dimensions</legend>
+            <div class="form-group">
+              <label for="radius"><i class="fa fa-circle"></i> Radius:</label>
+              <div class="slider-container">
+                <input type="range" id="radius" name="radius" min="1" max="3" step="0.2" value="1">
+                <span id="radiusValue" class="slider-value">1</span>
+              </div>
+            </div>
+          </fieldset>
+    
+          <fieldset>
+            <legend>Forces</legend>
+            <div class="form-group">
+              <label for="forceRadius"><i class="fa fa-arrows-alt"></i> Force Radius:</label>
+              <div class="slider-container">
+                <input type="range" id="forceRadius" name="forceRadius" min="30" max="200" step="1" value="30">
+                <span id="forceRadiusValue" class="slider-value">30</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="forcePower"><i class="fa fa-bolt"></i> Force Power:</label>
+              <div class="slider-container">
+                <input type="range" id="forcePower" name="forcePower" min="1" max="20" step="1" value="1">
+                <span id="forcePowerValue" class="slider-value">1</span>
+              </div>
+            </div>
+          </fieldset>
+    
+          <fieldset>
+            <legend>Evolution</legend>
+            <div class="form-group">
+              <label for="matrixEvolutionDelta"><i class="fa fa-sync-alt"></i> Matrix Evolution Delta:</label>
+              <div class="slider-container">
+                <input type="range" id="matrixEvolutionDelta" name="matrixEvolutionDelta" min="0" max="1" step="0.05">
+                <span id="matrixEvolutionDeltaValue" class="slider-value">0</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="matrixEvolutionDuration"><i class="fa fa-hourglass-half"></i> Matrix Evolution Duration:</label>
+              <div class="slider-container">
+                <input type="range" id="matrixEvolutionDuration" name="matrixEvolutionDuration" min="1000" max="10000" step="100">
+                <span id="matrixEvolutionDurationValue" class="slider-value">1</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="predatorPreyEvolutionDuration"><i class="fa fa-ban"></i><i class="fa fa-hourglass-end"></i> Predator Prey Evolution Duration:</label>
+              <div class="slider-container">
+                <input type="range" id="predatorPreyEvolutionDuration" name="predatorPreyEvolutionDuration" min="1" max="60" step="1" value="1">
+                <span id="predatorPreyEvolutionDurationValue" class="slider-value">1</span>
+              </div>
+            </div>
+            <div class="form-group toggle-container">
+              <input type="checkbox" id="toggleMatrixEvolution" name="toggleMatrixEvolution">
+              <label for="toggleMatrixEvolution">Enable Matrix Evolution</label>
+            </div>
+            <div class="form-group toggle-container">
+              <i class="fa fa-ban"></i>
+              <input type="checkbox" id="togglePredatorPreyEvolution" name="togglePredatorPreyEvolution">
+              <label for="togglePredatorPreyEvolution">Enable Predator Prey Evolution</label>
+            </div>
+          </fieldset>
+    
+          <fieldset>
+            <legend>Other Parameters</legend>
+            <div class="form-group toggle-container">
+              <input type="checkbox" id="mouseRepulsion" name="mouseRepulsion">
+              <label for="mouseRepulsion">Mouse Repulsion: On / Off</label>
+            </div>
+            <div class="form-group toggle-container">
+              <i class="fa fa-ban"></i>
+              <input type="checkbox" id="toggleAttractionMatrix" name="toggleAttractionMatrix">
+              <label for="toggleAttractionMatrix">Enable Attraction Matrix</label>
+            </div>
+          </fieldset>
+    
+          <fieldset id="attractionMatrixSection">
+            <legend>Attraction Matrix</legend>
+            <div id="attractionMatrixContainer" class="attraction-matrix">
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <script src="script.js"></script>
+     <script src="form.js"></script>
+</body>
+</html>
