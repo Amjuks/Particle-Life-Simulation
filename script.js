@@ -28,7 +28,7 @@ const minDamping = 0.9;
 const speedThreshold = 0.5;
 let mouseX = canvas.width / 2;
 let mouseY = canvas.height / 2;
-let mouseActive = true;
+let mouseActive = false;
 
 canvas.addEventListener('mousemove', (e) => {
   const rect = canvas.getBoundingClientRect();
@@ -49,7 +49,6 @@ let colorValues;
 let attractionMatrix;
 
 function initializeSimulation() {
-    
     positionX = new Float32Array(simulationParams.n);
     positionY = new Float32Array(simulationParams.n);
     velocitiesX = new Float32Array(simulationParams.n);
@@ -58,7 +57,6 @@ function initializeSimulation() {
     colorValues = [];
     attractionMatrix = createAttractionMatrix(simulationParams.nc);
 
-    
     for (let i = 0; i < simulationParams.n; i++) {
         positionX[i] = Math.random() * canvas.width;
         positionY[i] = Math.random() * canvas.height;
@@ -66,7 +64,6 @@ function initializeSimulation() {
         velocitiesY[i] = 0;
         colors[i] = Math.floor(Math.random() * simulationParams.nc);
     }
-
     
     for (let i = 0; i < simulationParams.nc; i ++) {
         colorValues[i] = `hsl(${i * 360 / simulationParams.nc}, 100%, 50%)`;
@@ -96,7 +93,6 @@ function createAttractionMatrix() {
             }
             row.push(value);
         }
-        console.log(`Row ${i}:`, row);
         rows.push(row);
     }
     return rows;
@@ -125,7 +121,6 @@ function generatePredatorPreyPairs() {
         const prey = potentialPrey[Math.floor(Math.random() * potentialPrey.length)];
 
         pairs.push([predator, prey]);
-        console.log(pairs[pairs.length-1]);
         assignedPairs.add(`${predator}-${prey}`);
     }
 
@@ -212,7 +207,6 @@ function updateParticles() {
             }
         }
 
-        
         if (mouseActive) {
             const dxm = minimumDistance(mouseX - positionX[i], canvas.width);
             const dym = minimumDistance(mouseY - positionY[i], canvas.height);
