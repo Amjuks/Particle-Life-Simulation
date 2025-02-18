@@ -3,15 +3,20 @@ const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
+// Predefined values in url
+const url = new URL(window.location.href);
+const params = new URLSearchParams(url.search);
+
 const simulationParams = {
-    n: 1200,
-    nc: 4,
-    radius: 1,
-    forceRadius: 160,
-    forcePower: 5,
+    n: params.get('n') || 800,
+    nc: params.get('nc') || 5,
+    radius: params.get('radius') || 2,
+    forceRadius: params.get('forceRadius') || 160,
+    forcePower: params.get('forcePower') || 1,
+    mouseRepulsion: false,
     matrixEvolutionDelta: 1,
     matrixEvolutionInterval: null,
-    matrixEvolutionDuration: 5 * 1000,
+    matrixEvolutionDuration: 2 * 1000,
 };
 
 const initializeParameters = ['n', 'nc'];
@@ -100,6 +105,7 @@ function createAttractionMatrix() {
 
 function generatePredatorPreyPairs() {
     if (simulationParams.nc < 2) return []; 
+    return [];
 
     const pairs = [];
     const speciesList = Array.from({ length: simulationParams.nc }, (_, i) => i);
@@ -136,7 +142,7 @@ function evolvePredatorPreyPairs() {
     createAttractionMatrix();
 }
 
-setInterval(evolvePredatorPreyPairs, evolvePredatorPreyDuration);
+// setInterval(evolvePredatorPreyPairs, evolvePredatorPreyDuration);
 
 const beta = [0.1, 0.6];
 function force(d, a = 0.3) {
@@ -172,9 +178,10 @@ function evolveAttractionMatrix() {
         j = Math.floor(Math.random() * simulationParams.nc);
       }
   }
-  let delta = (Math.random() * simulationParams.matrixEvolutionDelta - (simulationParams.matrixEvolutionDelta / 2));
-  attractionMatrix[i][j] += delta;
-  attractionMatrix[i][j] = Math.max(-2, Math.min(3, attractionMatrix[i][j]));
+//   let delta = (Math.random() * simulationParams.matrixEvolutionDelta) / (2 * simulationParams.matrixEvolutionDelta);
+    let delta = (Math.random() * simulationParams.matrixEvolutionDelta) - simulationParams.matrixEvolutionDelta / 2;
+    attractionMatrix[i][j] += delta;
+    attractionMatrix[i][j] = Math.max(-2, Math.min(3, attractionMatrix[i][j]));
 }
 
 function toggleEvolutionMatrix(toggle) {
@@ -207,7 +214,7 @@ function updateParticles() {
             }
         }
 
-        if (mouseActive) {
+        if (simulationParams.mouseRepulsion && mouseActive) {
             const dxm = minimumDistance(mouseX - positionX[i], canvas.width);
             const dym = minimumDistance(mouseY - positionY[i], canvas.height);
             const dm = Math.sqrt(dxm * dxm + dym * dym);

@@ -25,6 +25,12 @@ function resetInactivityTimeout() {
 	inactivityTimeout = setTimeout(hideForm, 5000);
 }
 
+function updateURLparams(param, value) {
+  params.set(param, value);
+  url.search = params.toString();
+  window.history.replaceState({}, '', url);
+}
+
 function updateInputValues(input, display, initialize, multiplier=1, round=0) {
 	const displayElement = document.querySelector(display);
 
@@ -33,6 +39,7 @@ function updateInputValues(input, display, initialize, multiplier=1, round=0) {
 			const value = input.value;
 			displayElement.textContent = (value * multiplier).toFixed(round);
 			simulationParams[initialize] = value;
+      updateURLparams(initialize, value);
 			if (initializeParameters.includes(initialize)) {
 				initializeSimulation();
 			}
@@ -41,6 +48,7 @@ function updateInputValues(input, display, initialize, multiplier=1, round=0) {
 		input.addEventListener('input', () => {
 			const value = input.value;
 			displayElement.textContent = (value * multiplier).toFixed(round);
+      updateURLparams(initialize, value);
 		});
 	}
 
@@ -86,12 +94,13 @@ function initFormInputs() {
 
 	updateInputValues(formInputs[inputs[0]], '#numberOfParticlesValue', 'n');
 	updateInputValues(formInputs[inputs[1]], '#numberOfColorsValue', 'nc');
-	updateInputValues(formInputs[inputs[2]], '#radiusValue', 'radius');
+	updateInputValues(formInputs[inputs[2]], '#radiusValue', 'radius', 1, 1);
 	updateInputValues(formInputs[inputs[3]], '#forceRadiusValue', 'forceRadius');
 	updateInputValues(formInputs[inputs[4]], '#forcePowerValue', 'forcePower');
 	updateInputValues(formInputs[inputs[5]], '#matrixEvolutionDeltaValue', 'matrixEvolutionDelta', 1, 2);
 	updateInputValues(formInputs[inputs[6]], '#matrixEvolutionDurationValue', 'matrixEvolutionDuration', 0.001, 1);
   updateCheckboxValues(formInputs[inputs[8]], toggleEvolutionMatrix);
+  updateCheckboxValues(formInputs[inputs[10]], () => { simulationParams.mouseRepulsion = formInputs[inputs[10]].checked; });
 }
 
 initFormInputs();
