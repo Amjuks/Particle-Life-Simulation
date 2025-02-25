@@ -18,6 +18,7 @@ const simulationParams = {
     matrixEvolutionInterval: null,
     matrixEvolutionDuration: 2 * 1000,
 };
+const backgroundColor = params.get('bg') || 'rgba(0, 0, 0, 1)';
 
 const initializeParameters = ['n', 'nc'];
 
@@ -260,7 +261,7 @@ function drawParticles() {
 }
 
 function clearCanvas() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+    ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 

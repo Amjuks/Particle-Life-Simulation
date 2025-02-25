@@ -15,36 +15,6 @@ canvas {
     padding: 0;
 }
 
-.starter-tip {
-  position: fixed;
-  margin: 2rem;
-  text-align: center;
-  transform: translateY(500%);
-  padding: 0.5rem 0.5rem;
-  border-radius: 15px;
-  font-weight: 300;
-  background-color: rgba(0, 0, 0, 0.559);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  animation: blink-tip 3s 4s forwards, slidein-tip 2s forwards;
-}
-
-@keyframes slidein-tip {
-  0% {
-    transform: translateY(500%);
-  } 100% {
-    transform: translateY(0%);
-  }
-  
-}
-
-@keyframes blink-tip {
-  0% {
-    opacity: 1;
-  }  100% {
-    opacity: 0;
-  }
-}
-
 .fa-ban {
   color: red;
   margin-right: 5px;
